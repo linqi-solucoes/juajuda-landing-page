@@ -459,20 +459,17 @@
     btn.innerHTML = '<span class="spinner"></span> Enviando...';
 
     try {
-      const response = await fetch(ENV.SHEETS_URL, {
+      await fetch(ENV.SHEETS_URL, {
         method: 'POST',
+        mode: 'no-cors',
         body: params
       });
-      const result = await response.json();
 
-      if (result.result === 'success') {
-        document.getElementById('formFields').style.display = 'none';
-        document.querySelector('.form-title').style.display = 'none';
-        document.querySelector('.form-subtitle').style.display = 'none';
-        document.getElementById('successState').classList.add('visible');
-      } else {
-        throw new Error(result.message || 'Erro ao enviar dados');
-      }
+      // no-cors mode: can't read response, assume success if no error thrown
+      document.getElementById('formFields').style.display = 'none';
+      document.querySelector('.form-title').style.display = 'none';
+      document.querySelector('.form-subtitle').style.display = 'none';
+      document.getElementById('successState').classList.add('visible');
     } catch (error) {
       console.error('Erro no envio:', error);
       alert('Ops! Ocorreu um erro ao enviar. Tente novamente.');
