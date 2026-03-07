@@ -1,494 +1,742 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>juajuda · Compre melhor, mais rápido e sem complicação</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="env.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
-<style>
-  :root {
-    /* Brandbook — Cores Principais */
-    --off-white: #F4F4F4;
-    --indigo: #626AF1;
-    --salmon: #F3A17C;
-    --deep-blue: #3339A7;
-    --navy: #1D1840;
-    /* Brandbook — Cores de Apoio */
-    --green: #52E391;
-    --purple: #9900FF;
-    --dark-slate: #354346;
-    /* Derived */
-    --indigo-dim: rgba(98, 106, 241, 0.12);
-    --indigo-border: rgba(98, 106, 241, 0.25);
-    --card-border: rgba(255,255,255, 0.10);
-    --text-primary: #F4F4F4;
-    --text-secondary: #b0afc4;
-    --text-muted: #7a7892;
-    --input-bg: rgba(29, 24, 64, 0.6);
-    --input-border: rgba(98, 106, 241, 0.2);
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>juajuda · Compre melhor, mais rápido e sem complicação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="env.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+  <style>
+    :root {
+      /* Brandbook — Cores Principais */
+      --off-white: #F4F4F4;
+      --indigo: #626AF1;
+      --salmon: #F3A17C;
+      --deep-blue: #3339A7;
+      --navy: #1D1840;
+      /* Brandbook — Cores de Apoio */
+      --green: #52E391;
+      --purple: #9900FF;
+      --dark-slate: #354346;
+      /* Derived */
+      --indigo-dim: rgba(98, 106, 241, 0.12);
+      --indigo-border: rgba(98, 106, 241, 0.25);
+      --card-border: rgba(255, 255, 255, 0.10);
+      --text-primary: #F4F4F4;
+      --text-secondary: #b0afc4;
+      --text-muted: #7a7892;
+      --input-bg: rgba(29, 24, 64, 0.6);
+      --input-border: rgba(98, 106, 241, 0.2);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--navy);
-    color: var(--text-primary);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  .bg-atmosphere {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-  }
-  .bg-atmosphere::before {
-    content: ''; position: absolute; top: -40%; left: -30%;
-    width: 90vw; height: 90vw;
-    background: radial-gradient(circle, rgba(98,106,241,0.10) 0%, transparent 55%);
-    animation: drift 22s ease-in-out infinite alternate;
-  }
-  .bg-atmosphere::after {
-    content: ''; position: absolute; bottom: -25%; right: -20%;
-    width: 75vw; height: 75vw;
-    background: radial-gradient(circle, rgba(243,161,124,0.07) 0%, transparent 50%);
-    animation: drift 28s ease-in-out infinite alternate-reverse;
-  }
-  @keyframes drift {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(30px, -25px) scale(1.04); }
-  }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--navy);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .grain {
-    position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.02;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat; background-size: 200px;
-  }
+    .bg-atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-  .wrapper {
-    position: relative; z-index: 2;
-    max-width: 520px; margin: 0 auto; padding: 0 20px;
-    min-height: 100dvh; display: flex; flex-direction: column;
-  }
+    .bg-atmosphere::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -30%;
+      width: 90vw;
+      height: 90vw;
+      background: radial-gradient(circle, rgba(98, 106, 241, 0.10) 0%, transparent 55%);
+      animation: drift 22s ease-in-out infinite alternate;
+    }
 
-  /* ── Header ── */
-  .header {
-    padding: 36px 0 0; text-align: center;
-    animation: fadeUp 0.6s ease-out both;
-  }
-  .logo-text {
-    font-size: 30px; letter-spacing: -0.02em; margin-bottom: 24px;
-  }
-  .logo-text .ju { font-weight: 700; color: #fff; }
-  .logo-text .ajuda { font-weight: 400; color: var(--indigo); }
+    .bg-atmosphere::after {
+      content: '';
+      position: absolute;
+      bottom: -25%;
+      right: -20%;
+      width: 75vw;
+      height: 75vw;
+      background: radial-gradient(circle, rgba(243, 161, 124, 0.07) 0%, transparent 50%);
+      animation: drift 28s ease-in-out infinite alternate-reverse;
+    }
 
-  .hero-title {
-    font-size: 26px; font-weight: 700; line-height: 1.25;
-    letter-spacing: -0.02em; margin-bottom: 12px;
-  }
-  .hero-title .highlight { color: var(--salmon); }
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
 
-  .hero-sub {
-    font-size: 15px; font-weight: 400; line-height: 1.6;
-    color: var(--text-secondary); max-width: 420px; margin: 0 auto;
-  }
+      100% {
+        transform: translate(30px, -25px) scale(1.04);
+      }
+    }
 
-  /* ── Ju Section ── */
-  .ju-section {
-    display: flex; flex-direction: column; align-items: center;
-    margin: 28px 0 24px;
-    animation: fadeUp 0.6s 0.15s ease-out both;
-  }
-  .ju-photo {
-    width: 140px; height: 140px; border-radius: 50%;
-    object-fit: cover; object-position: center top;
-    border: 3px solid var(--indigo);
-    box-shadow: 0 0 0 6px rgba(98,106,241,0.15), 0 12px 32px rgba(0,0,0,0.3);
-    margin-bottom: 16px;
-  }
-  .ju-intro {
-    font-size: 14px; font-weight: 400; line-height: 1.6;
-    color: var(--text-secondary); text-align: center; max-width: 380px;
-  }
-  .ju-intro strong { color: var(--salmon); font-weight: 600; }
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px;
+    }
 
-  /* ── Form card ── */
-  .form-card {
-    background: linear-gradient(165deg, rgba(51,57,167,0.18) 0%, rgba(29,24,64,0.95) 60%);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 28px 24px; margin-bottom: 20px;
-    animation: fadeUp 0.6s 0.25s ease-out both;
-    position: relative; overflow: hidden;
-    backdrop-filter: blur(8px);
-  }
-  .form-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--indigo), var(--salmon), var(--green));
-  }
-  .form-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-  .form-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 22px; }
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .field { margin-bottom: 14px; }
-  .field label {
-    display: block; font-size: 12px; font-weight: 600;
-    color: var(--text-secondary); margin-bottom: 6px;
-  }
-  .field input, .field select {
-    width: 100%; padding: 12px 14px;
-    background: var(--input-bg); border: 1px solid var(--input-border);
-    border-radius: var(--radius-sm); color: var(--text-primary);
-    font-family: 'Poppins', sans-serif; font-size: 14px;
-    outline: none; transition: border-color 0.25s, box-shadow 0.25s;
-    -webkit-appearance: none;
-  }
-  .field input::placeholder { color: var(--text-muted); }
-  .field input:focus, .field select:focus {
-    border-color: var(--indigo);
-    box-shadow: 0 0 0 3px var(--indigo-dim);
-  }
-  .field select {
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23b0afc4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 14px center;
-    padding-right: 36px;
-  }
-  .field select option { background: var(--navy); color: var(--text-primary); }
+    /* ── Header ── */
+    .header {
+      padding: 36px 0 0;
+      text-align: center;
+      animation: fadeUp 0.6s ease-out both;
+    }
 
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .logo-text {
+      font-size: 30px;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
 
-  .field-erp-outro { margin-top: 8px; display: none; }
-  .field-erp-outro.visible { display: block; animation: fadeUp 0.25s ease-out; }
+    .logo-text .ju {
+      font-weight: 700;
+      color: #fff;
+    }
 
-  /* ── Terms checkbox ── */
-  .terms-field {
-    display: flex; align-items: flex-start; gap: 10px;
-    margin: 18px 0 6px;
-  }
-  .terms-field input[type="checkbox"] {
-    width: 18px; height: 18px; min-width: 18px; margin-top: 2px;
-    accent-color: var(--indigo); cursor: pointer;
-  }
-  .terms-field label {
-    font-size: 12px; font-weight: 400; color: var(--text-muted);
-    line-height: 1.5; cursor: pointer;
-  }
-  .terms-field label a {
-    color: var(--indigo); text-decoration: underline; text-underline-offset: 2px;
-  }
+    .logo-text .ajuda {
+      font-weight: 400;
+      color: var(--indigo);
+    }
 
-  /* ── reCAPTCHA widget ── */
-  .recaptcha-wrapper {
-    margin: 16px 0 8px;
-    display: flex; justify-content: center;
-    min-height: 78px;
-  }
-  .recaptcha-error {
-    border: 2px solid var(--salmon);
-    border-radius: 4px;
-    padding: 2px;
-  }
+    .hero-title {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
 
-  /* ── Submit ── */
-  .submit-btn {
-    width: 100%; padding: 14px; margin-top: 10px;
-    background: var(--indigo); color: #fff;
-    font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
-    border: none; border-radius: var(--radius-sm); cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.25s, background 0.25s;
-  }
-  .submit-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 28px rgba(98,106,241,0.35);
-    background: #5059e0;
-  }
-  .submit-btn:active { transform: translateY(0); }
-  .submit-btn .arrow {
-    display: inline-block; margin-left: 6px; transition: transform 0.2s;
-  }
-  .submit-btn:hover .arrow { transform: translateX(3px); }
-  .submit-btn:disabled {
-    opacity: 0.6; cursor: not-allowed; transform: none !important;
-    box-shadow: none !important;
-  }
-  .submit-btn .spinner {
-    display: inline-block; width: 16px; height: 16px;
-    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
-    border-radius: 50%; animation: spin 0.6s linear infinite;
-    vertical-align: middle; margin-right: 8px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+    .hero-title .highlight {
+      color: var(--salmon);
+    }
 
-  /* ── Error / success states ── */
-  .field-error input, .field-error select {
-    border-color: var(--salmon) !important;
-    box-shadow: 0 0 0 3px rgba(243,161,124,0.15) !important;
-  }
-  .terms-error { animation: shake 0.4s ease; }
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
-  }
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 420px;
+      margin: 0 auto;
+    }
 
-  .trust-bar {
-    text-align: center; padding-bottom: 32px;
-    animation: fadeUp 0.6s 0.35s ease-out both;
-  }
-  .trust-text { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-  .trust-text strong { color: var(--text-secondary); font-weight: 500; }
+    /* ── Ju Section ── */
+    .ju-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 28px 0 24px;
+      animation: fadeUp 0.6s 0.15s ease-out both;
+    }
 
-  .success-state { display: none; text-align: center; padding: 36px 16px; }
-  .success-state.visible { display: block; animation: fadeUp 0.4s ease-out; }
-  .success-icon {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--green), #3dd47a);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 28px; margin-bottom: 18px; color: var(--navy); font-weight: 700;
-  }
-  .success-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-  .success-state p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .ju-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--indigo);
+      box-shadow: 0 0 0 6px rgba(98, 106, 241, 0.15), 0 12px 32px rgba(0, 0, 0, 0.3);
+      margin-bottom: 16px;
+    }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    .ju-intro {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 380px;
+    }
 
-  @media (max-width: 380px) {
-    .hero-title { font-size: 22px; }
-    .form-card { padding: 22px 18px; }
-    .field-row { grid-template-columns: 1fr; gap: 14px; }
-    .ju-photo { width: 110px; height: 110px; }
-  }
-</style>
+    .ju-intro strong {
+      color: var(--salmon);
+      font-weight: 600;
+    }
+
+    /* ── Form card ── */
+    .form-card {
+      background: linear-gradient(165deg, rgba(51, 57, 167, 0.18) 0%, rgba(29, 24, 64, 0.95) 60%);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s 0.25s ease-out both;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--indigo), var(--salmon), var(--green));
+    }
+
+    .form-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .form-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      -webkit-appearance: none;
+    }
+
+    .field input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px var(--indigo-dim);
+    }
+
+    .field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23b0afc4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    .field select option {
+      background: var(--navy);
+      color: var(--text-primary);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field-erp-outro {
+      margin-top: 8px;
+      display: none;
+    }
+
+    .field-erp-outro.visible {
+      display: block;
+      animation: fadeUp 0.25s ease-out;
+    }
+
+    /* ── Terms checkbox ── */
+    .terms-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 18px 0 6px;
+    }
+
+    .terms-field input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: var(--indigo);
+      cursor: pointer;
+    }
+
+    .terms-field label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .terms-field label a {
+      color: var(--indigo);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── reCAPTCHA widget ── */
+    .recaptcha-wrapper {
+      margin: 16px 0 8px;
+      display: flex;
+      justify-content: center;
+      min-height: 78px;
+    }
+
+    .recaptcha-error {
+      border: 2px solid var(--salmon);
+      border-radius: 4px;
+      padding: 2px;
+    }
+
+    /* ── Submit ── */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      background: var(--indigo);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.25s, background 0.25s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(98, 106, 241, 0.35);
+      background: #5059e0;
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn .arrow {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform 0.2s;
+    }
+
+    .submit-btn:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .submit-btn .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ── Error / success states ── */
+    .field-error input,
+    .field-error select {
+      border-color: var(--salmon) !important;
+      box-shadow: 0 0 0 3px rgba(243, 161, 124, 0.15) !important;
+    }
+
+    .terms-error {
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-4px);
+      }
+
+      75% {
+        transform: translateX(4px);
+      }
+    }
+
+    .trust-bar {
+      text-align: center;
+      padding-bottom: 32px;
+      animation: fadeUp 0.6s 0.35s ease-out both;
+    }
+
+    .trust-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .trust-text strong {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 36px 16px;
+    }
+
+    .success-state.visible {
+      display: block;
+      animation: fadeUp 0.4s ease-out;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #3dd47a);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 18px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .success-state h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .success-state p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-title {
+        font-size: 22px;
+      }
+
+      .form-card {
+        padding: 22px 18px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .ju-photo {
+        width: 110px;
+        height: 110px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="bg-atmosphere"></div>
-<div class="grain"></div>
+  <div class="bg-atmosphere"></div>
+  <div class="grain"></div>
 
-<div class="wrapper">
+  <div class="wrapper">
 
-  <header class="header">
-    <div class="logo-text">
-      <span class="ju">ju</span><span class="ajuda">ajuda</span>
-    </div>
-    <h1 class="hero-title">
-      Compre melhor, mais rápido<br>e <span class="highlight">sem complicação</span>
-    </h1>
-    <p class="hero-sub">
-      A Ju é uma assistente de compras que vai te livrar das planilhas complexas e portais de fornecedores.
-    </p>
-  </header>
-
-  <div class="ju-section">
-    <img src="ju-avatar.png" alt="Ju — Assistente de compras juajuda" class="ju-photo">
-    <p class="ju-intro">
-      A <strong>Ju</strong> analisa seu estoque, compara condições nos distribuidores e monta o melhor pedido — tudo por conversa no WhatsApp.
-    </p>
-  </div>
-
-  <div class="form-card" id="formCard">
-    <h2 class="form-title">Quero conhecer a Ju</h2>
-    <p class="form-subtitle">Preencha abaixo e entraremos em contato</p>
-
-    <div id="formFields">
-      <div class="field" id="field-name">
-        <label for="name">Nome completo *</label>
-        <input type="text" id="name" placeholder="Seu nome" required>
+    <header class="header">
+      <div class="logo-text">
+        <span class="ju">ju</span><span class="ajuda">ajuda</span>
       </div>
+      <h1 class="hero-title">
+        Compre melhor, mais rápido<br>e <span class="highlight">sem complicação</span>
+      </h1>
+    </header>
 
-      <div class="field" id="field-whatsapp">
-        <label for="whatsapp">WhatsApp *</label>
-        <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
-      </div>
-
-      <div class="field" id="field-email">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" placeholder="seu@email.com">
-      </div>
-
-      <div class="field-row">
-        <div class="field" id="field-pharmacy">
-          <label for="pharmacy">Nome da farmácia *</label>
-          <input type="text" id="pharmacy" placeholder="Farmácia...">
-        </div>
-        <div class="field" id="field-cnpj">
-          <label for="cnpj">CNPJ da farmácia</label>
-          <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
-        </div>
-      </div>
-
-      <div class="field" id="field-erp">
-        <label for="erp">Qual ERP usa?</label>
-        <select id="erp">
-          <option value="" disabled selected>Selecione...</option>
-          <option value="Trier">Trier</option>
-          <option value="Softpharma">Softpharma</option>
-          <option value="Profarma">Profarma</option>
-          <option value="HiDoctor">HiDoctor</option>
-          <option value="Pharmus">Pharmus</option>
-          <option value="Outro">Outro</option>
-          <option value="Não sei informar">Não sei informar</option>
-        </select>
-        <div class="field-erp-outro" id="erpOutroField">
-          <input type="text" id="erpOutro" placeholder="Digite o nome do seu ERP">
-        </div>
-      </div>
-
-      <div class="terms-field" id="termsField">
-        <input type="checkbox" id="terms">
-        <label for="terms">
-          Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e a <a href="#" target="_blank">Política de Privacidade</a> da juajuda.
-        </label>
-      </div>
-
-      <div class="recaptcha-wrapper" id="recaptchaWrapper">
-        <div id="recaptchaWidget"></div>
-      </div>
-
-      <button class="submit-btn" onclick="handleSubmit()">
-        Quero testar <span class="arrow">→</span>
-      </button>
+    <div class="ju-section">
+      <img src="ju-avatar.png" alt="Ju — Assistente de compras juajuda" class="ju-photo">
+      <p class="ju-intro">
+        A Ju é uma assistente de compras que vai te livrar das planilhas complexas e portais de fornecedores.
+      </p>
     </div>
 
-    <div class="success-state" id="successState">
-      <div class="success-icon">✓</div>
-      <h3>Recebemos seus dados!</h3>
-      <p>Nosso time entrará em contato para agendar uma demonstração da Ju.</p>
+    <div class="form-card" id="formCard">
+      <h2 class="form-title">Quero conhecer a Ju</h2>
+      <p class="form-subtitle">Preencha abaixo e entraremos em contato</p>
+
+      <div id="formFields">
+        <div class="field" id="field-name">
+          <label for="name">Nome completo *</label>
+          <input type="text" id="name" placeholder="Seu nome" required>
+        </div>
+
+        <div class="field" id="field-whatsapp">
+          <label for="whatsapp">WhatsApp *</label>
+          <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com">
+        </div>
+
+        <div class="field-row">
+          <div class="field" id="field-pharmacy">
+            <label for="pharmacy">Nome da farmácia *</label>
+            <input type="text" id="pharmacy" placeholder="Farmácia...">
+          </div>
+          <div class="field" id="field-cnpj">
+            <label for="cnpj">CNPJ da farmácia</label>
+            <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
+          </div>
+        </div>
+
+        <div class="field" id="field-erp">
+          <label for="erp">Qual ERP usa?</label>
+          <select id="erp">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="Alpha7">Alpha7</option>
+            <option value="Trier">Trier</option>
+            <option value="Softpharma">Softpharma</option>
+            <option value="ToolsPharma">ToolsPharma</option>
+            <option value="PROCFIT">PROCFIT</option>
+            <option value="SysFar">SysFar</option>
+            <option value="Outro">Outro</option>
+            <option value="Não sei informar">Não sei informar</option>
+          </select>
+          <div class="field-erp-outro" id="erpOutroField">
+            <input type="text" id="erpOutro" placeholder="Digite o nome do seu ERP">
+          </div>
+        </div>
+
+        <div class="terms-field" id="termsField">
+          <input type="checkbox" id="terms">
+          <label for="terms">
+            Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e a <a href="#" target="_blank">Política
+              de Privacidade</a> da juajuda.
+          </label>
+        </div>
+
+        <div class="recaptcha-wrapper" id="recaptchaWrapper">
+          <div id="recaptchaWidget"></div>
+        </div>
+
+        <button class="submit-btn" onclick="handleSubmit()">
+          Quero testar <span class="arrow">→</span>
+        </button>
+      </div>
+
+      <div class="success-state" id="successState">
+        <div class="success-icon">✓</div>
+        <h3>Recebemos seus dados!</h3>
+        <p>A Ju entrará em contato assim que estiver pronta para te ajudar a comprar!.</p>
+      </div>
     </div>
+
+    <div class="trust-bar">
+      <p class="trust-text">
+        <strong>Sem compromisso.</strong> Conheça e decida se faz sentido para sua farmácia.<br>
+        Seus dados estão protegidos e não serão compartilhados.
+      </p>
+    </div>
+
   </div>
 
-  <div class="trust-bar">
-    <p class="trust-text">
-      <strong>Sem compromisso.</strong> Conheça e decida se faz sentido para sua farmácia.<br>
-      Seus dados estão protegidos e não serão compartilhados.
-    </p>
-  </div>
-
-</div>
-
-<script>
-  // ── reCAPTCHA render callback ──
-  var recaptchaWidgetId;
-  function onRecaptchaLoad() {
-    recaptchaWidgetId = grecaptcha.render('recaptchaWidget', {
-      sitekey: ENV.RECAPTCHA_SITE_KEY,
-      theme: 'dark'
-    });
-  }
-
-  // ── WhatsApp mask ──
-  document.getElementById('whatsapp').addEventListener('input', function(e) {
-    let v = e.target.value.replace(/\D/g, '');
-    if (v.length > 11) v = v.slice(0, 11);
-    if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
-    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
-    else if (v.length > 0) v = `(${v}`;
-    e.target.value = v;
-  });
-
-  // ── CNPJ mask ──
-  document.getElementById('cnpj').addEventListener('input', function(e) {
-    let v = e.target.value.replace(/\D/g, '');
-    if (v.length > 14) v = v.slice(0, 14);
-    if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, '$1.$2.$3/$4-$5');
-    else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4})/, '$1.$2.$3/$4');
-    else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d{0,3})/, '$1.$2.$3');
-    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,3})/, '$1.$2');
-    e.target.value = v;
-  });
-
-  // ── ERP "Outro" toggle ──
-  document.getElementById('erp').addEventListener('change', function() {
-    const outroField = document.getElementById('erpOutroField');
-    if (this.value === 'Outro') {
-      outroField.classList.add('visible');
-      document.getElementById('erpOutro').focus();
-    } else {
-      outroField.classList.remove('visible');
-    }
-  });
-
-  // ── Submit ──
-  async function handleSubmit() {
-    // Clear previous errors
-    document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
-    document.getElementById('termsField').classList.remove('terms-error');
-    document.getElementById('recaptchaWrapper').classList.remove('recaptcha-error');
-
-    const name = document.getElementById('name').value.trim();
-    const whatsapp = document.getElementById('whatsapp').value.trim();
-    const pharmacy = document.getElementById('pharmacy').value.trim();
-    const termsChecked = document.getElementById('terms').checked;
-    const recaptchaToken = grecaptcha.getResponse(recaptchaWidgetId);
-    let hasError = false;
-
-    if (!name) { document.getElementById('field-name').classList.add('field-error'); hasError = true; }
-    if (!whatsapp) { document.getElementById('field-whatsapp').classList.add('field-error'); hasError = true; }
-    if (!pharmacy) { document.getElementById('field-pharmacy').classList.add('field-error'); hasError = true; }
-    if (!termsChecked) { document.getElementById('termsField').classList.add('terms-error'); hasError = true; }
-    if (!recaptchaToken) { document.getElementById('recaptchaWrapper').classList.add('recaptcha-error'); hasError = true; }
-    if (hasError) return;
-
-    const erpSelect = document.getElementById('erp');
-    const erpValue = erpSelect.value === 'Outro'
-      ? 'Outro: ' + document.getElementById('erpOutro').value.trim()
-      : erpSelect.value;
-
-    // Build URLSearchParams for Apps Script (URL Encoded form data is safest for Apps Script)
-    const formData = new URLSearchParams();
-    formData.append('nome', name);
-    formData.append('whatsapp', whatsapp);
-    formData.append('email', document.getElementById('email').value.trim());
-    formData.append('farmacia', pharmacy);
-    formData.append('cnpj', document.getElementById('cnpj').value.trim());
-    formData.append('erp', erpValue);
-    formData.append('source', 'landing_page_juajuda');
-    // Important: App Script variable expects recaptchaToken
-    formData.append('recaptchaToken', recaptchaToken);
-
-    // Show loading state
-    const btn = document.querySelector('.submit-btn');
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Enviando...';
-
-    try {
-      // Dispara a requisição em background
-      await fetch(ENV.SHEETS_URL, {
-        method: "POST",
-        body: formData,
-        mode: "no-cors", // Previne erros de CORS na resposta opaca do Google Scripts
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
+  <script>
+    // ── reCAPTCHA render callback ──
+    var recaptchaWidgetId;
+    function onRecaptchaLoad() {
+      recaptchaWidgetId = grecaptcha.render('recaptchaWidget', {
+        sitekey: ENV.RECAPTCHA_SITE_KEY,
+        theme: 'dark'
       });
-
-      // Show success after fetch completes (we assume success due to no-cors)
-      document.getElementById('formFields').style.display = 'none';
-      document.querySelector('.form-title').style.display = 'none';
-      document.querySelector('.form-subtitle').style.display = 'none';
-      document.getElementById('successState').classList.add('visible');
-    } catch (error) {
-      console.error('Erro no envio:', error);
-      alert('Ops! Ocorreu um erro ao enviar. Tente novamente.');
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-      grecaptcha.reset(recaptchaWidgetId);
     }
-  }
 
-  // ── Clear error on focus ──
-  document.querySelectorAll('.field input, .field select').forEach(el => {
-    el.addEventListener('focus', function() { this.closest('.field')?.classList.remove('field-error'); });
-  });
-</script>
+    // ── WhatsApp mask ──
+    document.getElementById('whatsapp').addEventListener('input', function (e) {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length > 6) v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+      else if (v.length > 2) v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      else if (v.length > 0) v = `(${v}`;
+      e.target.value = v;
+    });
+
+    // ── CNPJ mask ──
+    document.getElementById('cnpj').addEventListener('input', function (e) {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length > 14) v = v.slice(0, 14);
+      if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, '$1.$2.$3/$4-$5');
+      else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4})/, '$1.$2.$3/$4');
+      else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d{0,3})/, '$1.$2.$3');
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,3})/, '$1.$2');
+      e.target.value = v;
+    });
+
+    // ── ERP "Outro" toggle ──
+    document.getElementById('erp').addEventListener('change', function () {
+      const outroField = document.getElementById('erpOutroField');
+      if (this.value === 'Outro') {
+        outroField.classList.add('visible');
+        document.getElementById('erpOutro').focus();
+      } else {
+        outroField.classList.remove('visible');
+      }
+    });
+
+    // ── Submit ──
+    async function handleSubmit() {
+      // Clear previous errors
+      document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+      document.getElementById('termsField').classList.remove('terms-error');
+      document.getElementById('recaptchaWrapper').classList.remove('recaptcha-error');
+
+      const name = document.getElementById('name').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const pharmacy = document.getElementById('pharmacy').value.trim();
+      const termsChecked = document.getElementById('terms').checked;
+      const recaptchaToken = grecaptcha.getResponse(recaptchaWidgetId);
+      let hasError = false;
+
+      if (!name) { document.getElementById('field-name').classList.add('field-error'); hasError = true; }
+      if (!whatsapp) { document.getElementById('field-whatsapp').classList.add('field-error'); hasError = true; }
+      if (!pharmacy) { document.getElementById('field-pharmacy').classList.add('field-error'); hasError = true; }
+      if (!termsChecked) { document.getElementById('termsField').classList.add('terms-error'); hasError = true; }
+      if (!recaptchaToken) { document.getElementById('recaptchaWrapper').classList.add('recaptcha-error'); hasError = true; }
+      if (hasError) return;
+
+      const erpSelect = document.getElementById('erp');
+      const erpValue = erpSelect.value === 'Outro'
+        ? 'Outro: ' + document.getElementById('erpOutro').value.trim()
+        : erpSelect.value;
+
+      // Build URLSearchParams for Apps Script (URL Encoded form data is safest for Apps Script)
+      const formData = new URLSearchParams();
+      formData.append('nome', name);
+      formData.append('whatsapp', whatsapp);
+      formData.append('email', document.getElementById('email').value.trim());
+      formData.append('farmacia', pharmacy);
+      formData.append('cnpj', document.getElementById('cnpj').value.trim());
+      formData.append('erp', erpValue);
+      formData.append('source', 'landing_page_juajuda');
+      // Important: App Script variable expects recaptchaToken
+      formData.append('recaptchaToken', recaptchaToken);
+
+      // Show loading state
+      const btn = document.querySelector('.submit-btn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Enviando...';
+
+      try {
+        // Dispara a requisição em background
+        await fetch(ENV.SHEETS_URL, {
+          method: "POST",
+          body: formData,
+          mode: "no-cors", // Previne erros de CORS na resposta opaca do Google Scripts
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        });
+
+        // Show success after fetch completes (we assume success due to no-cors)
+        document.getElementById('formFields').style.display = 'none';
+        document.querySelector('.form-title').style.display = 'none';
+        document.querySelector('.form-subtitle').style.display = 'none';
+        document.getElementById('successState').classList.add('visible');
+      } catch (error) {
+        console.error('Erro no envio:', error);
+        alert('Ops! Ocorreu um erro ao enviar. Tente novamente.');
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        grecaptcha.reset(recaptchaWidgetId);
+      }
+    }
+
+    // ── Clear error on focus ──
+    document.querySelectorAll('.field input, .field select').forEach(el => {
+      el.addEventListener('focus', function () { this.closest('.field')?.classList.remove('field-error'); });
+    });
+  </script>
 
 </body>
+
 </html>
