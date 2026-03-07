@@ -458,25 +458,41 @@
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span> Enviando...';
 
-    try {
-      await fetch(ENV.SHEETS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: params
-      });
+    // Create hidden iframe for form target (bypasses CORS)
+    let iframe = document.getElementById('hidden-iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'hidden-iframe';
+      iframe.id = 'hidden-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
 
-      // no-cors mode: can't read response, assume success if no error thrown
+    // Build and submit a real form → no CORS issues
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = ENV.SHEETS_URL;
+    form.target = 'hidden-iframe';
+
+    for (const [key, value] of params.entries()) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+
+    // Show success after short delay (can't read iframe response cross-origin)
+    setTimeout(() => {
       document.getElementById('formFields').style.display = 'none';
       document.querySelector('.form-title').style.display = 'none';
       document.querySelector('.form-subtitle').style.display = 'none';
       document.getElementById('successState').classList.add('visible');
-    } catch (error) {
-      console.error('Erro no envio:', error);
-      alert('Ops! Ocorreu um erro ao enviar. Tente novamente.');
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-      grecaptcha.reset(recaptchaWidgetId);
-    }
+    }, 1500);
   }
 
   // ── Clear error on focus ──
